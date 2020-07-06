@@ -4,8 +4,11 @@ import Home         from './views/pages/Home.js'
 import Search       from './views/pages/Search.js'
 import Error404     from './views/pages/Error404.js'
 import Suggest      from './views/pages/Suggest.js'
+import ArraySort    from './views/pages/ArraySort.js'
+import ArrayFilter    from './views/pages/ArrayFilter.js'
 import Navbar       from './views/components/Navbar.js'
 import Bottombar    from './views/components/Bottombar.js' 
+
 
 import Utils        from './services/Utils.js'
 
@@ -14,6 +17,8 @@ const routes = {
     '/'             : Home
     , '/search'     : Search    
     , '/suggest'    : Suggest
+    , '/arraysort'  : ArraySort
+    , '/arrayfilter': ArrayFilter
 };
 
 

@@ -3,9 +3,9 @@ let Bottombar = {
         let view =  /*html*/`
         <footer class="footer">
             <div class="content has-text-centered">
-                <h1>
-                    Footer(Need to design)
-                </h1>
+                <h3>
+                    Javascript Single Page Application 
+                </h3>
             </div>
         </footer>
         `

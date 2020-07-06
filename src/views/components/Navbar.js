@@ -1,9 +1,10 @@
 let Navbar = {
-    render: async () => {
-        let view =  /*html*/`
-             <nav class="navbar" role="navigation" aria-label="main navigation">
+  render: async () => {
+    let view = /*html*/ `
+        <!-- The navigation menu -->
+        <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="container">
-                    <div class="navbar-brand">
+        <div class="navbar-brand">
                         <a class="navbar-item" href="/#/">
                           
                             <h1><strong>Find Your Meal</strong></h1>
@@ -15,28 +16,26 @@ let Navbar = {
                             <span aria-hidden="true"></span>
                         </a>
                     </div>
-
-                    <div id="navbarBasicExample" class="navbar-menu is-active" aria-expanded="false">
-                        <div class="navbar-start">
-                            <a class="navbar-item" href="/#/">
-                                Home
-                            </a>
-                            <a class="navbar-item" href="/#/search">
-                                Search
-                            </a>
-                            <a class="navbar-item" href="/#/suggest">
-                                Suggest
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </nav>
-        `
-        return view
-    },
-    after_render: async () => { }
-
-}
+<div class="navbarnew">
+  <a href="/#/">Home</a>
+  <a href="/#/search">Search</a>
+  <a href="/#/suggest">Suggest Me</a>
+  <div class="subnav">
+    <button class="subnavbtn">Arrays Execrise <i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="/#/arraysort">ArraySort</a>
+      <a href="/#/arrayfilter">ArrayFilter</a>
+      
+    </div>
+  </div>
+  <div class="subnav">
+   
+ 
+</div>
+        `;
+    return view;
+  },
+  after_render: async () => {},
+};
 
 export default Navbar;

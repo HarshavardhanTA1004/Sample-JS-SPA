@@ -11,10 +11,10 @@ let searchMeal = async (e) => {
           .then(res => res.json())
           .then(data => {
             console.log("Searched Result",data);
-            // resultHeading.innerHTML = `<h2>Search results for '${term}':</h2>`;
+            resultHeading.innerHTML = `<h2>Search results for '${term}':</h2>`;
     
             if (data.meals === null) {
-              resultHeading.innerHTML = `<p>There are no search results. Try again!<p>`;
+              resultHeading.innerHTML = `<h2>There are no search results. Try again!<h2>`;
             } else {
               searchedMeal.innerHTML = data.meals
                 .map( //The map() method calls the provided function once for each element in an array, in order.
@@ -65,7 +65,8 @@ let Search = {
              
       </div>
       <br><br>
-
+ 
+      <div id="result-heading"></div>
       <div id="meals" class="meals"></div>
         `
 
