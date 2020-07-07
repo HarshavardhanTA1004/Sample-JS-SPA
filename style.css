@@ -186,11 +186,22 @@ input[type='text'] {
   font-size: 300%;
 }
 
+.searchpage h3{
+  color: #fff;
+  font-size: 150%;
+}
+
 #result-heading h2{
   font-size: 25px;
   font-weight: 400;
   color: #fff;
 
+}
+#result-headingnew h2{
+  font-size: 25px;
+  font-weight: 400;
+  color: #fff;
+width: 90%;
 }
 #result-headingnew1 h2{
   font-size: 25px;
@@ -205,6 +216,34 @@ width: 90%;
   color: #fff;
 width: 90%;
 }
+#result-headingnew3 h2{
+  font-size: 25px;
+  font-weight: 400;
+  color: #fff;
+width: 90%;
+}
+
+#result-headingnew1 p {
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+width: 90%;
+
+}
+#result-headingnew3 p {
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+width: 90%;
+
+}
+#result-headingnew2 p {
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+width: 90%;
+
+}
 
 #sortmeals h2{
   font-size: 12px;
@@ -216,13 +255,36 @@ width: 90%;
 #ascsortmeals {
   right: 80px;
   margin: 0 5px 5px 100px;
-
 }
 
 #descsortmeals {
   right: 80px;
   margin: 0 5px 5px 100px;
+}
 
+#spreadoperator {
+  right: 80px;
+  margin: 0 5px 5px 250px;
+}
+
+#objectassign {
+  right: 80px;
+  margin: 0 5px 5px 50px;
+}
+
+#mealfirst {
+  right: 80px;
+  margin: 0 5px 5px 8px;
+}
+
+#mealsecond {
+  right: 80px;
+  margin: 0 5px 5px 8px;
+}
+
+#mealthird {
+  right: 80px;
+  margin: 0 5px 5px 8px;
 }
 /**********************************************************************/
 

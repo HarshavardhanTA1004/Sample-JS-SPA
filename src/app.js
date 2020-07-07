@@ -1,24 +1,30 @@
 "use strict";
 
-import Home         from './views/pages/Home.js'
-import Search       from './views/pages/Search.js'
-import Error404     from './views/pages/Error404.js'
-import Suggest      from './views/pages/Suggest.js'
-import ArraySort    from './views/pages/ArraySort.js'
-import ArrayFilter    from './views/pages/ArrayFilter.js'
-import Navbar       from './views/components/Navbar.js'
-import Bottombar    from './views/components/Bottombar.js' 
+import Home            from './views/pages/Home.js'
+import Search          from './views/pages/Search.js'
+import Error404        from './views/pages/Error404.js'
+import Suggest         from './views/pages/Suggest.js'
+import ArraySort       from './views/pages/ArraySort.js'
+import ArrayFilter     from './views/pages/ArrayFilter.js'
+import Destructuring   from './views/pages/Destructuring.js'
+import RestParameter   from './views/pages/Restparameter.js'
+import SpreadOperators from './views/pages/SpreadOperators.js'
+import Navbar          from './views/components/Navbar.js'
+import Bottombar       from './views/components/Bottombar.js' 
 
 
 import Utils        from './services/Utils.js'
 
 // List of supported routes. Any url other than these routes will throw a 404 error
 const routes = {
-    '/'             : Home
-    , '/search'     : Search    
-    , '/suggest'    : Suggest
-    , '/arraysort'  : ArraySort
-    , '/arrayfilter': ArrayFilter
+    '/'                  : Home
+    , '/search'          : Search    
+    , '/suggest'         : Suggest
+    , '/arraysort'       : ArraySort
+    , '/arrayfilter'     : ArrayFilter
+    , '/destructuring'   : Destructuring
+    , '/restparameter'   : RestParameter
+    , '/spreadoperators' : SpreadOperators
 };
 
 

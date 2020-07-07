@@ -21,13 +21,16 @@ let Navbar = {
   <a href="/#/search">Search</a>
   <a href="/#/suggest">Suggest Me</a>
   <div class="subnav">
-    <button class="subnavbtn">Arrays Execrise <i class="fa fa-caret-down"></i></button>
+    <button class="subnavbtn">Concepts Execrise <i class="fa fa-caret-down"></i></button>
     <div class="subnav-content">
       <a href="/#/arraysort">ArraySort</a>
       <a href="/#/arrayfilter">ArrayFilter</a>
-      
+      <a href="/#/destructuring">Destructuring</a>
+      <a href="/#/restparameter">RestParameter</a>
+      <a href="/#/spreadoperators">SpreadOperator</a>
     </div>
   </div>
+  
   <div class="subnav">
    
  
