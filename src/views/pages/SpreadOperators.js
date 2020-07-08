@@ -1,12 +1,11 @@
-var checkGetDestructedMealsHaveData = [];
+var mealsInfo = [];
+var record = "Home";
 var searchedMeal;
-var searchedMeal1;
-var searchedMeal2;
 var spreadoperator;
 var objectassign;
-var spreadExplaination;
-var assignExplaination;
-var totalmeals;
+var warning;
+var successful
+var allMeals;
 
 var spreadComparisonObject = {
     idMeal: "52858",
@@ -48,30 +47,12 @@ let getMeals = async (e) => {
       fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("Searched Result", data.meals);
-          assignExplaination.innerHTML = ``;
-          spreadExplaination.innerHTML = ``;
-          
-          totalmeals.innerHTML = `<h2>Please observe the Title , Country name, Instructures. Try to relate the things later</h2>`
-         
-          checkGetDestructedMealsHaveData = data.meals[0];
-         let meal = checkGetDestructedMealsHaveData;
-          console.log("Arrays", checkGetDestructedMealsHaveData);
-          searchedMeal.innerHTML = `<div class="single-meal">
-          <h1>${meal.strMeal}</h1>
-          <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
-          <div class="single-meal-info">
-            ${meal.strCategory ? `<p>${meal.strCategory}</p>` : ''}  
-            ${meal.strArea ? `<p>${meal.strArea}</p>` : ''}
-          </div>
-      
-      
-          <div class="main">
-            <p>${meal.strInstructions}</p>
-            </div>
-        </div>
-      `;
-            
+          console.log("Searched Result", data.meals);          
+          mealsInfo = data.meals[0];
+         let meal = mealsInfo;
+          console.log("Arrays", mealsInfo);
+          getInnerHtmlElement(meal);
+          showExplanation(mealsInfo,record);            
         });
     }
   } catch (err) {
@@ -79,69 +60,67 @@ let getMeals = async (e) => {
   }
 };
 
-let spreadMerge = async (e) => {
+const getInnerHtmlElement = (meal) => {
+    searchedMeal.innerHTML = `<div class="single-meal">
+    <h1>${meal.strMeal}</h1>
+    <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+    <div class="single-meal-info">
+      ${meal.strCategory ? `<p>${meal.strCategory}</p>` : ''}  
+      ${meal.strArea ? `<p>${meal.strArea}</p>` : ''}
+    </div>
+    <div class="main">
+      <p>${meal.strInstructions}</p>
+      </div>
+  </div>
+`;
+}
+
+const showExplanation = (value,record) => {
+    if(value.length === 0){  
+        warning.innerHTML = `<h2>Please Click on 'Get Sample Record' button to make use of the example</h2>`;
+        successful.innerHTML = ``; 
+  }else{    
+    if(record === "Home") {
+        warning.innerHTML = ``;
+        successful.innerHTML = ``;        
+        allMeals.innerHTML = `<h2>Please observe the Title , Country name, Instructures. Try to relate the things later</h2>`;
+    }else{
+        warning.innerHTML = ``;
+        successful.innerHTML = `<h2>Merge object using ${record}</h2>`;        
+        allMeals.innerHTML = ``;
+    }
+  }
+}
+// THis is the example for merging objects using spread operator
+let getSpreadMerge = (e) => {
     e.preventDefault();
-if(checkGetDestructedMealsHaveData.length === 0){
-    spreadExplaination.innerHTML = `<h2>Please Click on 'Get Sample Record' button to make use of the example</h2>`
-    assignExplaination.innerHTML = ``;
+if(mealsInfo.length === 0){
+    showExplanation(mealsInfo);
 }else{
-    let meal = checkGetDestructedMealsHaveData;
-    let MergeObjects = {
+    let meal = mealsInfo;
+    let mergeObjects = {
         ...meal,
         ...spreadComparisonObject
     }
-    console.log(MergeObjects);
-    // console.log("othermeals",othermeals)
-    searchedMeal1.innerHTML =  `<div class="single-meal">
-    <h1>${MergeObjects.strMeal}</h1>
-    <img src="${MergeObjects.strMealThumb}" alt="${MergeObjects.strMeal}" />
-    <div class="single-meal-info">
-      ${MergeObjects.strCategory ? `<p>${MergeObjects.strCategory}</p>` : ''}  
-      ${MergeObjects.strArea ? `<p>${MergeObjects.strArea}</p>` : ''}
-    </div> 
-    <div class="main">
-            <p>${MergeObjects.strInstructions}</p>            
-          </div>
-        </div>
-      `;  
- 
-      assignExplaination.innerHTML = ``;
-      spreadExplaination.innerHTML = `<h2>Merge object using Spread operator(...).</h2><p>If objects have a property with the same name, then the right-most object property overwrites the previous one</p>`;
-      totalmeals.innerHTML = ``;
+    console.log(mergeObjects);
+    getInnerHtmlElement(mergeObjects);    
+    let record = "Spread operator(...)";
+    showExplanation(mealsInfo,record);
 }   
 };
-
-let assignMerge = async (e) => {
+// THis is the example for merging objects using object.assign
+let getAssignMerge = (e) => {
     e.preventDefault();
-    if(checkGetDestructedMealsHaveData.length === 0){
-        assignExplaination.innerHTML = `<h2>Please Click on 'Get Sample Record' button to make use of the example</h2>`
-        spreadExplaination.innerHTML = ``;
-
+    if(mealsInfo.length === 0){
+        showExplanation(mealsInfo);
     }else{
-
-        let meal = checkGetDestructedMealsHaveData; 
+        let meal = mealsInfo; 
         console.log(meal);
-        let MergeObjectsassign = Object.assign(meal, assignComparisonObject);
-        console.log(MergeObjectsassign);
-        // console.log("othermeals",othermeals)
-        searchedMeal2.innerHTML =  `<div class="single-meal">
-        <h1>${MergeObjectsassign.strMeal}</h1>
-        <img src="${MergeObjectsassign.strMealThumb}" alt="${MergeObjectsassign.strMeal}" />
-        <div class="single-meal-info">
-          ${MergeObjectsassign.strCategory ? `<p>${MergeObjectsassign.strCategory}</p>` : ''}  
-          ${MergeObjectsassign.strArea ? `<p>${MergeObjectsassign.strArea}</p>` : ''}
-        </div> 
-        <div class="main">
-                <p>${MergeObjectsassign.strInstructions}</p>          
-                
-              </div>
-            </div>
-          `;  
-       
-    
-          assignExplaination.innerHTML = `<h2>Merge object using Object.assign() method.</h2><p>Displays second meal from the Destructured Array.</p>`;
-          spreadExplaination.innerHTML = ``;
-          totalmeals.innerHTML = ``;
+        let mergeObjectsassign = Object.assign(meal, assignComparisonObject);
+        console.log(mergeObjectsassign);
+        getInnerHtmlElement(mergeObjectsassign)
+        let record = "Object.assign() method";
+        showExplanation(mealsInfo,record);
     }
    
 };
@@ -174,14 +153,9 @@ let SpreadOperators = {
       </div>
       <div id="result-headingnew" class="explain"></div>
       <div id="result-headingnew1" class="explain"></div>
-        <div id="result-headingnew2" class="explain"></div>
-       
-        <div id="sortmeals" class="meals"></div>
-     
+        <div id="result-headingnew2" class="explain"></div>      
+        
       <div id="single-meal"></div>
-      
-      
-      
         `;
 
     return view;
@@ -192,14 +166,12 @@ let SpreadOperators = {
     submit.addEventListener("click", getMeals);
     spreadoperator = document.getElementById("spreadoperator");
     objectassign = document.getElementById("objectassign");    
-    spreadoperator.addEventListener("click", spreadMerge);
-    objectassign.addEventListener("click", assignMerge);
-    searchedMeal = document.getElementById("single-meal");
-    searchedMeal1 = document.getElementById("single-meal");
-    searchedMeal2 = document.getElementById("single-meal");    
-    totalmeals = document.getElementById("result-headingnew");
-    spreadExplaination = document.getElementById("result-headingnew1");
-    assignExplaination = document.getElementById("result-headingnew2");
+    spreadoperator.addEventListener("click", getSpreadMerge);
+    objectassign.addEventListener("click", getAssignMerge);
+    searchedMeal = document.getElementById("single-meal");     
+    allMeals = document.getElementById("result-headingnew");
+    warning = document.getElementById("result-headingnew1");
+    successful = document.getElementById("result-headingnew2");
    
   },
 };

@@ -1,21 +1,19 @@
 let getPostsList = async () => {
-     
-    try {
-        
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?c=list`)
-        // const response = await fetch(`https://5bb634f6695f8d001496c082.mockapi.io/api/posts`, options)
-        const json = await response.json();
-        console.log(json)
-        return json
-    } catch (err) {
-        console.log('Error getting documents', err)
-    }
-}
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/list.php?c=list`
+    );
+    const json = await response.json();
+    return json;
+  } catch (err) {
+    console.log("Error getting documents", err);
+  }
+};
 
 let Home = {
-    render : async () => {
-        let posts = await getPostsList()
-        let view =  /*html*/`
+  render: async () => {
+    await getPostsList();
+    let view = /*html*/ `
         <div class= "homepage">
         <h1> WELCOME TO  </h1>
         <h2> FIND YOUR MEAL APPLICATION </h2><br><br>
@@ -30,12 +28,10 @@ let Home = {
         <br>
         </div>        
             
-        `
-        return view
-    }
-    , after_render: async () => {
-    }
-
-}
+        `;
+    return view;
+  },
+  after_render: async () => {},
+};
 
 export default Home;

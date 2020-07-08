@@ -1,15 +1,47 @@
-var checkGetRestMealsHaveData = [];
+var storeFetchedMeals = [];
+var record = "Home";
 var searchedMeal;
-var searchedMeal1;
-var searchedMeal2;
-var searchedMeal3;
-var mealfirst;
-var mealsecond;
-var mealthird;
-var mealThirdExplaination;;
-var mealFirstExplaination;
-var mealSecondExplaination;
-var totalmeals;
+var mealFirst;
+var mealSecond;
+var mealThird;
+var warningExplanation;
+var exampleExplanation;
+var showMeals;
+// This function is used to break down the repitation of code and can be used wherever it is needed.
+const getInnerHtmlDetails = (meals) => {
+    return meals
+      .map(
+        //The map() method calls the provided function once for each element in an array, in order.
+        (meal) => `
+              <div class="meal">      
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+                <div class="meal-info" data-mealID="${meal.idMeal}">
+                  <h3>${meal.strMeal}</h3>
+                </div>
+              </div>
+            `
+      )
+      .join(""); //The join() method returns the array as a string. By default it will return comma(,)
+  };
+  
+  const showExplanation = (value, record) => {
+    if (value.length === 0) {
+      warningExplanation.innerHTML = `<h2>No Data To search.. Please Click on "Get Meals" button</h2>`;
+      exampleExplanation.innerHTML = ``;
+    } else {
+      if (record === "Home") {
+        warningExplanation.innerHTML = ``;
+        exampleExplanation.innerHTML = ``;
+        showMeals.innerHTML = `<h2>Displays all the meals in the Array</h2>`;
+      } else {
+        warningExplanation.innerHTML = ``;
+        exampleExplanation.innerHTML = `<h2>${record}</h2>`;
+        showMeals.innerHTML = ``;
+      }
+    }
+  };
+  
+
 let getMeals = async (e) => {
   e.preventDefault();
 
@@ -19,30 +51,11 @@ let getMeals = async (e) => {
       //The trim() method removes whitespace from both sides of a string.
       fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
         .then((res) => res.json())
-        .then((data) => {
-          console.log("Searched Result", data.meals);
-          mealSecondExplaination.innerHTML = ``;
-          mealFirstExplaination.innerHTML = ``;
-          mealThirdExplaination.innerHTML = ``;
-          totalmeals.innerHTML = `<h2>Displays all the meals in the Array</h2>`
-         
-          checkGetRestMealsHaveData = data.meals;
-        ;
-          console.log("Arrays", checkGetRestMealsHaveData);
-          searchedMeal.innerHTML = data.meals
-            .map(
-              //The map() method calls the provided function once for each element in an array, in order.
-              (meal) => `
-                <div class="meal">
-            
-                  <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
-                  <div class="meal-info" data-mealID="${meal.idMeal}">
-                    <h3>${meal.strMeal}</h3>
-                  </div>
-                </div>
-              `
-            )
-            .join(""); //The join() method returns the array as a string.
+        .then((data) => {         
+          storeFetchedMeals = data.meals;        
+          console.log("Arrays", storeFetchedMeals);
+          searchedMeal.innerHTML = getInnerHtmlDetails(data.meals);
+          showExplanation(storeFetchedMeals,record);
         });
     }
   } catch (err) {
@@ -50,92 +63,45 @@ let getMeals = async (e) => {
   }
 };
 
-let firstmeal = async (e) => {
+let getFirstMeal = (e) => {
     e.preventDefault();
-   if(checkGetRestMealsHaveData.length === 0){
-    mealFirstExplaination.innerHTML = `<h2>Please Click on 'Get Sample Record' button to make use of the example</h2>`;
-    mealSecondExplaination.innerHTML = ``;
-    mealThirdExplaination.innerHTML = ``
-    totalmeals.innerHTML = ``;
+   if(storeFetchedMeals.length === 0){
+    showExplanation(storeFetchedMeals);
+    showMeals.innerHTML = ``;
    }else{
-    let [meal1,meal2,...othermeals] = checkGetRestMealsHaveData; 
-    console.log(meal1);
-    console.log("othermeals",othermeals)
-    searchedMeal1.innerHTML =  `
-        <div class="meal">
-    
-          <img src="${meal1.strMealThumb}" alt="${meal1.strMeal}" />
-          <div class="meal-info" data-mealID="${meal1.idMeal}">
-            <h3>${meal1.strMeal}</h3>
-          </div>
-        </div>
-      `
-      mealSecondExplaination.innerHTML = ``;
-      mealFirstExplaination.innerHTML = `<h2>First meal example</h2><p>Displays first meal from the Destructured Array.</p>`;
-      mealThirdExplaination.innerHTML = ``
-      totalmeals.innerHTML = ``;
+    let [meal1,,] = storeFetchedMeals; 
+    let meals = [meal1];
+    let record = "<h2>First meal example</h2><p>Displays first meal from the Destructured Array.</p>"
+    searchedMeal.innerHTML =  getInnerHtmlDetails(meals);
+    showExplanation(storeFetchedMeals,record);
    }    
 };
 
-let secondMeal = async (e) => {
+let getSecondMeal = (e) => {
     e.preventDefault();
 
-    if(checkGetRestMealsHaveData.length === 0){
-        mealFirstExplaination.innerHTML = ``;
-        mealSecondExplaination.innerHTML = `<h2>Please Click on 'Get Sample Record' button to make use of the example</h2>`;
-        mealThirdExplaination.innerHTML = ``
-        totalmeals.innerHTML = ``;
+    if(storeFetchedMeals.length === 0){
+        showExplanation(storeFetchedMeals);
     }else{
-        let [meal1,meal2,...othermeals] = checkGetRestMealsHaveData; 
-        console.log(meal2);
-        searchedMeal2.innerHTML =  `
-            <div class="meal">
-        
-              <img src="${meal2.strMealThumb}" alt="${meal2.strMeal}" />
-              <div class="meal-info" data-mealID="${meal2.idMeal}">
-                <h3>${meal2.strMeal}</h3>
-              </div>
-            </div>
-          `
-          mealSecondExplaination.innerHTML = `<h2>Second meal example</h2><p>Displays second from the meals in the Array.</p>`;
-          mealFirstExplaination.innerHTML = ``;
-          mealThirdExplaination.innerHTML = ``;
-          totalmeals.innerHTML = ``;
-    }
-    
+        let [,meal2,...othermeals] = storeFetchedMeals; 
+        let meals = [meal2];
+let record = "<h2>Second meal example</h2><p>Displays second from the meals in the Array.</p>";
+        searchedMeal.innerHTML =  getInnerHtmlDetails(meals);
+        showExplanation(storeFetchedMeals,record);         
+    }    
 };
 
-let thirdMeal = async (e) => {
+let getThirdMeal = (e) => {
     e.preventDefault();
 
-    if(checkGetRestMealsHaveData.length === 0){
-        mealFirstExplaination.innerHTML = ``;
-        mealSecondExplaination.innerHTML = ``;
-        mealThirdExplaination.innerHTML = `<h2>Please Click on 'Get Sample Record' button to make use of the example</h2>`
-        totalmeals.innerHTML = ``;
+    if(storeFetchedMeals.length === 0){
+        showExplanation(storeFetchedMeals);
     }else{
-        let [meal1,meal2,...othermeals] = checkGetRestMealsHaveData; 
-        console.log(othermeals);
-        searchedMeal3.innerHTML =  othermeals
-        .map(
-          //The map() method calls the provided function once for each element in an array, in order.
-          (meal) => `
-            <div class="meal">
-        
-              <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
-              <div class="meal-info" data-mealID="${meal.idMeal}">
-                <h3>${meal.strMeal}</h3>
-              </div>
-            </div>
-          `
-        )
-        .join("");
-        mealSecondExplaination.innerHTML = ``;
-        mealFirstExplaination.innerHTML = ``;
-        mealThirdExplaination.innerHTML = `<h2>Rest Parameter example</h2><p>Displays Rest from the meals in the Array.</p><br><p>ES6 provides a new kind of parameter so-called rest parameter that has a prefix of three dots (...).  The rest parameter allows you to represent an indefinite number of arguments as an array.</p>`
-        totalmeals.innerHTML = ``;
-    }
-    
+        let [meal1,,...othermeals] = storeFetchedMeals;  
+        let record = "<h2>Third meal example</h2><p>Displays Rest meals from the meals in the Array.</p>";      
+        searchedMeal.innerHTML =  getInnerHtmlDetails(othermeals);
+        showExplanation(storeFetchedMeals,record);      
+    }    
 };
 
 let RestParameter = {
@@ -143,10 +109,8 @@ let RestParameter = {
     let view = /*html*/ `
             <div class="searchpage">
       <h1>Destructuring example for Rest parameter</h1><br><br><br>
-      <div class="flex">
-     
-        <form class="flex" >
-          
+      <div class="flex">     
+        <form class="flex">          
           <button id="submit" class="search-btn" type="submit">
            Get Sample Records
           </button>
@@ -161,22 +125,14 @@ let RestParameter = {
 
           <button id="mealthird" class="sort-btn" type="submit">
           Display Rest of the meal from the destructured array.
-          </button>
-          
-        </form>
-        
+          </button>          
+        </form>       
              
       </div>
       <div id="result-headingnew" class="explain"></div>
       <div id="result-headingnew1" class="explain"></div>
-        <div id="result-headingnew2" class="explain"></div>
-        <div id="result-headingnew3" class="explain"></div>
- 
-        <div id="sortmeals" class="meals"></div>
+        <div id="result-headingnew2" class="explain"></div>       
       <div id="meals" class="meals"></div>
-      
-      
-      
         `;
 
     return view;
@@ -185,20 +141,16 @@ let RestParameter = {
     //The getElementById() method returns
     const submit = document.getElementById("submit");
     submit.addEventListener("click", getMeals);
-    mealfirst = document.getElementById("mealfirst");
-    mealsecond = document.getElementById("mealsecond");
-    mealthird = document.getElementById("mealthird");
-    mealfirst.addEventListener("click", firstmeal);
-    mealsecond.addEventListener("click", secondMeal);
-    mealthird.addEventListener("click", thirdMeal);
-    searchedMeal = document.getElementById("meals");
-    searchedMeal1 = document.getElementById("meals");
-    searchedMeal2 = document.getElementById("meals");
-    searchedMeal3 = document.getElementById("meals");
-    totalmeals = document.getElementById("result-headingnew");
-    mealFirstExplaination = document.getElementById("result-headingnew1");
-    mealSecondExplaination = document.getElementById("result-headingnew2");
-    mealThirdExplaination = document.getElementById("result-headingnew3");
+    mealFirst = document.getElementById("mealfirst");
+    mealSecond = document.getElementById("mealsecond");
+    mealThird = document.getElementById("mealthird");
+    mealFirst.addEventListener("click", getFirstMeal);
+    mealSecond.addEventListener("click", getSecondMeal);
+    mealThird.addEventListener("click", getThirdMeal);
+    searchedMeal = document.getElementById("meals");    
+    showMeals = document.getElementById("result-headingnew");
+    warningExplanation = document.getElementById("result-headingnew1");
+    exampleExplanation = document.getElementById("result-headingnew2");   
   },
 };
 
