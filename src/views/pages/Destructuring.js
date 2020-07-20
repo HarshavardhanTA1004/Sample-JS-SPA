@@ -1,3 +1,7 @@
+// ES6 provides a new feature called destructing assignment that allows you to destructure
+//  properties of an object or elements of an array into individual variables.
+
+
 var mealsData = [];
 var record = "Home";
 var searchedMeal;

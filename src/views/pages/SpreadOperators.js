@@ -1,3 +1,11 @@
+// ES6 provides a new operator called spread operator that consists of three dots (...). The spread operator allows you to
+//  spread out elements of an iterable object such as an array,a  map, or a set.
+// So the three dots ( ...) represent both the spread operator and the rest parameter.
+
+// Here are the main differences:
+
+// The spread operator unpacks elements.
+// The rest parametr packs elements into an array.
 var mealsInfo = [];
 var record = "Home";
 var searchedMeal;

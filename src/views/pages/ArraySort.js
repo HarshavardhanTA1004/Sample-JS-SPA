@@ -67,9 +67,9 @@ let getSortMealsAscendingOrder = (e) => {
   if (fetchedMeals.length === 0) {
     showAppropriateExplanation(fetchedMeals);
   } else {
-    var newSortedList = fetchedMeals.sort((a, b) => {
-      let firstComparsion = a.strMeal.toLowerCase(),
-        secondComparsion = b.strMeal.toLowerCase();
+    var newSortedList = fetchedMeals.sort((first, second) => {
+      let firstComparsion = first.strMeal.toLowerCase(),
+        secondComparsion = second.strMeal.toLowerCase();
 
       if (firstComparsion < secondComparsion) {
         return -1;

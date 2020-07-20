@@ -1,3 +1,11 @@
+//Let - In ES5, when you declare a variable using the var keyword, the scope of the variable is 
+//  if you declare it outside of a function or local in case you declare it inside a function.
+
+// ES6 provides a new way of declaring a variable by using the let keyword. The let keyword is similar
+//  to the var keyword, except that the variables it declares are block-scoped: 
+
+
+
 var storeMeals = [];
 var record = "Home";
 var searchedMeal;
@@ -14,7 +22,10 @@ let getMeals = async (e) => {
     if (term.trim()) {
       //The trim() method removes whitespace from both sides of a string.
       fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
-        .then((res) => res.json())
+        .then((res) => res.json()) //The instance method of the Promise object such as then(),
+        // catch(), or finally() returns a separate promise object. Therefore, you can call the promise’s
+        // instance method on the return Promise. The successively calling methods in this way is referred
+        // to as the promise chaining.
         .then((data) => {
           storeMeals = data.meals;
           searchedMeal.innerHTML = getInnerHtml(data.meals);
@@ -45,7 +56,7 @@ const getInnerHtml = (meals) => {
 
 const showExplanation = (value, record) => {
   if (value.length === 0) {
-    warningExplanation.innerHTML = `<h2>No Data To search.. Please Click on "Get Meals" button</h2>`;
+    warningExplanation.innerHTML = `<h2>No Data To search.. Please Click on "Get Meals" button</h2>`;//backticks
     exampleExplanation.innerHTML = ``;
   } else {
     if (record === "Home") {
